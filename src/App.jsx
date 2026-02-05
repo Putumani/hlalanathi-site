@@ -71,18 +71,21 @@ const PropertyGallery = ({ folder, prefix }) => {
 
 const Home = () => (
   <div className="animate-in fade-in duration-1000">
-    <header className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-slate-950">
-      <img src="/makhaya/room-1.jpg" className="absolute inset-0 w-full h-full object-cover opacity-40 scale-105" alt="Hero" />
+    <header className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-slate-900">
+      <img src="/makhaya/room-1.jpg" className="absolute inset-0 w-full h-full object-cover opacity-50" alt="Hero" />
       <div className="relative z-10 text-center px-6 max-w-5xl">
-        <h1 className="text-6xl md:text-9xl font-black text-white mb-6 tracking-tighter leading-none">
-          Live <span className="text-blue-500 italic">Better.</span>
+        <div className="inline-flex items-center gap-2 bg-blue-600/20 backdrop-blur-md border border-blue-400/30 text-blue-300 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest mb-6">
+            <Star size={12} fill="currentColor"/> Premium Khayelitsha Accommodation
+        </div>
+        <h1 className="text-5xl md:text-8xl font-black text-white mb-6 tracking-tighter leading-[0.9]">
+          Modern Living. <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 italic">Affordable Rates.</span>
         </h1>
-        <p className="text-slate-300 text-lg md:text-2xl max-w-2xl mx-auto mb-10 font-medium leading-relaxed">
-          Premium long-term rentals and executive short-stay accommodation in Khayelitsha.
+        <p className="text-slate-200 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-medium opacity-90">
+          From long-term bachelor flats to executive overnight B&B stays. Secure, clean, and centrally located.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/litha-park" className="bg-blue-600 text-white px-12 py-5 rounded-2xl font-bold hover:bg-blue-700 transition-all text-lg shadow-xl shadow-blue-900/40">View Rentals</Link>
-          <Link to="/makhaya-bb" className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-12 py-5 rounded-2xl font-bold hover:bg-white hover:text-slate-950 transition-all text-lg">Book B&B Stay</Link>
+          <Link to="/litha-park" className="bg-blue-600 text-white px-10 py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20">Litha Park Rentals</Link>
+          <Link to="/makhaya-bb" className="bg-white text-slate-900 px-10 py-4 rounded-2xl font-bold hover:bg-slate-100 transition-all">Makhaya B&B Stay</Link>
         </div>
       </div>
     </header>
