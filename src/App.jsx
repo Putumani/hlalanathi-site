@@ -69,11 +69,8 @@ const PropertyGallery = ({ folder, prefix }) => {
   );
 };
 
-// --- PAGES ---
-
 const Home = () => (
   <div className="animate-in fade-in duration-1000">
-    {/* HERO SECTION - Inspired by TLMZ */}
     <header className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-slate-900">
       <img src="/makhaya/room-1.jpg" className="absolute inset-0 w-full h-full object-cover opacity-50" alt="Hero" />
       <div className="relative z-10 text-center px-6 max-w-5xl">
@@ -81,7 +78,7 @@ const Home = () => (
             <Star size={12} fill="currentColor"/> Premium Khayelitsha Accommodation
         </div>
         <h1 className="text-5xl md:text-8xl font-black text-white mb-6 tracking-tighter leading-[0.9]">
-          Luxury Living. <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 italic">Affordable Rates.</span>
+          Modern Living. <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 italic">Affordable Rates.</span>
         </h1>
         <p className="text-slate-200 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-medium opacity-90">
           From long-term bachelor flats to executive overnight B&B stays. Secure, clean, and centrally located.
@@ -93,7 +90,6 @@ const Home = () => (
       </div>
     </header>
 
-    {/* AMENITIES TICKER */}
     <section className="bg-white py-8 overflow-hidden border-b border-slate-100">
       <div className="animate-marquee flex gap-12 items-center text-slate-400 font-bold text-xs uppercase tracking-[0.2em]">
         {[1, 2].map(j => (
@@ -108,7 +104,6 @@ const Home = () => (
       </div>
     </section>
 
-    {/* ACCOMMODATION CARDS */}
     <section className="max-w-7xl mx-auto px-6 py-24">
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
         <div>
@@ -119,7 +114,6 @@ const Home = () => (
       </div>
 
       <div className="grid md:grid-cols-2 gap-12">
-        {/* LITHA */}
         <div className="group bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
           <div className="h-80 overflow-hidden relative">
             <img src="/litha/flat-1.webp" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Rentals" />
@@ -134,7 +128,6 @@ const Home = () => (
           </div>
         </div>
 
-        {/* MAKHAYA */}
         <div className="group bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
           <div className="h-80 overflow-hidden relative">
             <img src="/makhaya/room-1.jpg" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="B&B" />
@@ -151,7 +144,6 @@ const Home = () => (
       </div>
     </section>
 
-    {/* LOCAL ATTRACTIONS - Fills the "blank" space */}
     <section className="bg-slate-50 py-24 px-6">
       <div className="max-w-6xl mx-auto text-center mb-16">
         <h2 className="text-3xl font-black text-slate-900 mb-4">Perfectly Located</h2>
