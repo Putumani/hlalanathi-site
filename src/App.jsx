@@ -19,7 +19,7 @@ const Navbar = () => (
         <Link to="/litha-park" className="hover:text-blue-600 transition-colors">Litha Flats</Link>
         <Link to="/makhaya-bb" className="hover:text-orange-600 transition-colors">Makhaya B&B</Link>
       </div>
-      <a href="https://wa.me/27123456789" className="flex items-center gap-2 bg-green-500 text-white px-5 py-2.5 rounded-full text-xs font-bold hover:bg-green-600 transition-all shadow-md">
+      <a href="https://wa.me/27639135127" className="flex items-center gap-2 bg-green-500 text-white px-5 py-2.5 rounded-full text-xs font-bold hover:bg-green-600 transition-all shadow-md">
         <MessageCircle size={16} /> WHATSAPP
       </a>
     </div>
@@ -45,7 +45,7 @@ const Footer = () => (
       </div>
       <div>
         <h4 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-6">Support</h4>
-        <p className="text-slate-400 text-sm mb-4 flex items-center gap-2"><Phone size={14}/> 24/7 Cellphone Reachable</p>
+        <p className="text-slate-400 text-sm mb-4 flex items-center gap-2"><Phone size={14}/> 063 913 5127</p>
         <p className="text-slate-400 text-sm italic text-blue-200">"I am 80% of the time available around the premises."</p>
       </div>
     </div>
@@ -170,7 +170,7 @@ const LithaPark = () => (
         <div className="bg-blue-600 text-white p-8 rounded-[2rem] shadow-xl shadow-blue-100">
           <h3 className="font-bold text-xl mb-2 text-white">Rental Status</h3>
           <p className="text-blue-100 text-sm mb-4 italic font-medium">Available from 29/01/2026. Non-furnished bachelor units.</p>
-          <a href="https://wa.me/27123456789" className="block text-center w-full bg-white text-blue-600 py-3 rounded-xl font-bold hover:bg-slate-100 transition-colors uppercase text-xs tracking-widest">
+          <a href="https://wa.me/27639135127" className="block text-center w-full bg-white text-blue-600 py-3 rounded-xl font-bold hover:bg-slate-100 transition-colors uppercase text-xs tracking-widest">
             Check Availability
           </a>
         </div>
@@ -225,7 +225,7 @@ const MakhayaBB = () => (
           <p className="text-slate-400 text-sm mb-6 leading-relaxed relative z-10">
             Secure entry through locked gates and garage access ensures complete privacy. Available 24/7 for booking.
           </p>
-          <a href="https://wa.me/27123456789" className="block relative z-10 text-center bg-orange-600 py-3.5 rounded-2xl font-bold hover:scale-[1.02] transition-transform">
+          <a href="https://wa.me/27639135127" className="block relative z-10 text-center bg-orange-600 py-3.5 rounded-2xl font-bold hover:scale-[1.02] transition-transform">
             BOOK VIA WHATSAPP
           </a>
           <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-orange-600/10 blur-3xl rounded-full"></div>
