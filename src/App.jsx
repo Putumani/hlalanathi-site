@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { MapPin, Wifi, Droplets, Wind, Tv, Car, WashingMachine, Phone, MessageCircle, ChevronRight } from 'lucide-react';
+import { MapPin, Wifi, Droplets, Wind, Tv, Car, WashingMachine, Phone, MessageCircle, ChevronRight, X } from 'lucide-react';
 
-// --- HELPER: Auto-scroll to top on page navigation ---
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
@@ -28,7 +27,7 @@ const Navbar = () => (
 );
 
 const Footer = () => (
-  <footer className="bg-slate-950 text-white pt-16 pb-8 px-6">
+  <footer className="bg-slate-950 text-white pt-16 pb-8 px-6 mt-auto">
     <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 border-b border-slate-800 pb-12 mb-8">
       <div>
         <h4 className="text-lg font-bold mb-4">Hlalanathi Properties</h4>
@@ -47,25 +46,63 @@ const Footer = () => (
       <div>
         <h4 className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-6">Support</h4>
         <p className="text-slate-400 text-sm mb-4 flex items-center gap-2"><Phone size={14}/> 24/7 Cellphone Reachable</p>
-        <p className="text-slate-400 text-sm italic">"I am 80% of the time available around the premises."</p>
+        <p className="text-slate-400 text-sm italic text-blue-200">"I am 80% of the time available around the premises."</p>
       </div>
     </div>
     <p className="text-center text-[10px] text-slate-600 uppercase tracking-[0.3em]">© 2026 Hlalanathi B&B and Flat Rentals</p>
   </footer>
 );
 
-const PropertyGallery = ({ propertyName }) => (
-  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8">
-    {[1, 2, 3, 4, 5, 6].map((i) => (
-      <div key={i} className="aspect-square bg-slate-100 rounded-3xl overflow-hidden group border border-slate-100 relative">
-        <div className="absolute inset-0 flex items-center justify-center text-slate-300 text-xs italic">
-          {propertyName} Photo {i}
-        </div>
-        <div className="absolute inset-0 bg-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+const PropertyGallery = ({ folder, prefix }) => {
+  const [selectedImg, setSelectedImg] = useState(null);
+  const images = [1, 2, 3, 4, 5, 6];
+  const ext = prefix === 'flat' ? 'webp' : 'jpg';
+
+  return (
+    <>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8">
+        {images.map((i) => {
+          const imgSrc = `/${folder}/${prefix}-${i}.${ext}`;
+          return (
+            <div 
+              key={i} 
+              onClick={() => setSelectedImg(imgSrc)}
+              className="aspect-square bg-slate-100 rounded-3xl overflow-hidden group border border-slate-100 relative cursor-pointer shadow-sm hover:shadow-md transition-all"
+            >
+              <img 
+                src={imgSrc} 
+                alt={`${prefix}-${i}`}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                onError={(e) => { 
+                  e.target.onerror = null; 
+                  e.target.src = "https://placehold.co/600x400/e2e8f0/64748b?text=Image+Not+Found"; 
+                }}
+              />
+              <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
+          );
+        })}
       </div>
-    ))}
-  </div>
-);
+
+      {selectedImg && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setSelectedImg(null)}
+        >
+          <button className="absolute top-6 right-6 text-white hover:text-blue-400 transition-colors">
+            <X size={40} />
+          </button>
+          <img 
+            src={selectedImg} 
+            className="max-w-full max-h-[85vh] rounded-xl shadow-2xl border-4 border-white/10" 
+            alt="Full size view" 
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </>
+  );
+};
 
 const Home = () => (
   <div className="animate-in fade-in duration-1000">
@@ -84,19 +121,19 @@ const Home = () => (
     <section className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 pb-24">
       <div className="group bg-white p-10 rounded-[3rem] border border-slate-200 hover:shadow-2xl transition-all duration-500 flex flex-col items-start">
         <span className="bg-blue-50 text-blue-600 text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-6">Litha Park</span>
-        <h2 className="text-3xl font-black mb-4">Residential Bachelor Flats</h2>
-        <p className="text-slate-500 mb-8 leading-relaxed">Secure, well-maintained bachelor units in Phakamisa. Includes unlimited Wi-Fi, hot water, and secure parking.</p>
+        <h2 className="text-3xl font-black mb-4 tracking-tight">Residential Bachelor Flats</h2>
+        <p className="text-slate-500 mb-8 leading-relaxed">Secure, well-maintained bachelor units in Phakamisa. Includes unlimited Wi-Fi, hot water, and shared laundry access.</p>
         <Link to="/litha-park" className="mt-auto flex items-center gap-2 bg-slate-900 text-white px-8 py-3.5 rounded-2xl font-bold hover:bg-blue-600 transition-colors">
-          View Flats <ChevronRight size={18} />
+          View Gallery <ChevronRight size={18} />
         </Link>
       </div>
 
       <div className="group bg-white p-10 rounded-[3rem] border border-slate-200 hover:shadow-2xl transition-all duration-500 flex flex-col items-start">
         <span className="bg-orange-50 text-orange-600 text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest mb-6">Makhaya</span>
-        <h2 className="text-3xl font-black mb-4">Overnight B&B Stay</h2>
-        <p className="text-slate-500 mb-8 leading-relaxed">Situated next to the Mall. Features double beds, aircon, and DSTV. Perfect for couples and travelers.</p>
+        <h2 className="text-3xl font-black mb-4 tracking-tight">Overnight B&B Stay</h2>
+        <p className="text-slate-500 mb-8 leading-relaxed">Situated next to the Mall. Features double beds, aircon, and secure garage parking. Ideal for travelers.</p>
         <Link to="/makhaya-bb" className="mt-auto flex items-center gap-2 bg-slate-900 text-white px-8 py-3.5 rounded-2xl font-bold hover:bg-orange-600 transition-colors">
-          View Rooms <ChevronRight size={18} />
+          View Gallery <ChevronRight size={18} />
         </Link>
       </div>
     </section>
@@ -108,44 +145,41 @@ const LithaPark = () => (
     <div className="grid lg:grid-cols-2 gap-16">
       <div>
         <Link to="/" className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-8 inline-block">← Back to Overview</Link>
-        <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">Phakamisa Bachelor Flats</h1>
+        <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900">Phakamisa Bachelor Flats</h1>
         <p className="text-slate-500 text-lg mb-8 leading-relaxed">
-          Our Phakamisa units in Litha Park offer a blend of privacy and community. Available immediately for long-term lease.
+          Premium studio living in Litha Park. Designed for professionals and students seeking a safe, connected environment.
         </p>
-        
         <div className="space-y-4 mb-10">
           <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
             <div className="bg-white p-2 rounded-lg text-blue-600"><Wifi size={20}/></div>
-            <span className="font-bold text-slate-700">Unlimited Wi-Fi for all tenants</span>
+            <span className="font-bold text-slate-700 text-sm">Unlimited Wi-Fi for all tenants</span>
           </div>
           <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
             <div className="bg-white p-2 rounded-lg text-blue-600"><Droplets size={20}/></div>
-            <span className="font-bold text-slate-700">Unlimited Hot Water included</span>
+            <span className="font-bold text-slate-700 text-sm">Unlimited Hot Water included</span>
           </div>
           <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
             <div className="bg-white p-2 rounded-lg text-blue-600"><WashingMachine size={20}/></div>
-            <span className="font-bold text-slate-700">Shared Access Washing Machine</span>
+            <span className="font-bold text-slate-700 text-sm">Shared Access Washing Machine</span>
           </div>
           <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl">
             <div className="bg-white p-2 rounded-lg text-blue-600"><Car size={20}/></div>
-            <span className="font-bold text-slate-700">Secure Gated Parking</span>
+            <span className="font-bold text-slate-700 text-sm">Secure Gated Parking</span>
           </div>
         </div>
-
         <div className="bg-blue-600 text-white p-8 rounded-[2rem] shadow-xl shadow-blue-100">
           <h3 className="font-bold text-xl mb-2 text-white">Rental Status</h3>
-          <p className="text-blue-100 text-sm mb-4 italic">Available from 29/01/2026. Non-furnished bachelor units.</p>
-          <button className="w-full bg-white text-blue-600 py-3 rounded-xl font-bold hover:bg-slate-100 transition-colors uppercase text-xs tracking-widest">
+          <p className="text-blue-100 text-sm mb-4 italic font-medium">Available from 29/01/2026. Non-furnished bachelor units.</p>
+          <a href="https://wa.me/27123456789" className="block text-center w-full bg-white text-blue-600 py-3 rounded-xl font-bold hover:bg-slate-100 transition-colors uppercase text-xs tracking-widest">
             Check Availability
-          </button>
+          </a>
         </div>
       </div>
-      
       <div>
-        <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-          <ChevronRight size={14} /> Property Gallery
+        <h3 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
+          <ChevronRight size={14} /> Litha Park Gallery
         </h3>
-        <PropertyGallery propertyName="Flat" />
+        <PropertyGallery folder="litha" prefix="flat" />
       </div>
     </div>
   </div>
@@ -155,60 +189,57 @@ const MakhayaBB = () => (
   <div className="max-w-6xl mx-auto px-6 py-16 animate-in slide-in-from-bottom-8 duration-700">
     <div className="grid lg:grid-cols-2 gap-16">
       <div className="order-2 lg:order-1">
-        <h3 className="text-xs font-black uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-          <ChevronRight size={14} /> Guest Suite Gallery
+        <h3 className="text-sm font-black uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
+          <ChevronRight size={14} /> Makhaya B&B Gallery
         </h3>
-        <PropertyGallery propertyName="B&B Room" />
+        <PropertyGallery folder="makhaya" prefix="room" />
       </div>
-
       <div className="order-1 lg:order-2">
         <Link to="/" className="text-xs font-bold text-orange-600 uppercase tracking-widest mb-8 inline-block">← Back to Overview</Link>
         <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900 leading-tight">Makhaya <br/>Overnight Suites</h1>
-        <p className="text-slate-500 text-lg mb-8 leading-relaxed italic">
-          "Situated in Khayelitsha next to the mall. Ideal for couples seeking a secure, clean overnight stay."
+        <p className="text-slate-500 text-lg mb-8 leading-relaxed italic border-l-4 border-orange-100 pl-4">
+          "Situated next to Khayelitsha Mall. Ideal for travelers seeking a secure, clean overnight stay."
         </p>
-
         <div className="grid grid-cols-2 gap-4 mb-10">
-          <div className="p-5 border border-slate-100 rounded-3xl flex flex-col gap-3">
+          <div className="p-5 border border-slate-100 rounded-3xl flex flex-col gap-3 hover:bg-orange-50/30 transition-colors">
             <Tv className="text-orange-500" />
-            <span className="text-sm font-bold">DSTV Compact</span>
+            <span className="text-sm font-bold text-slate-900">DSTV Compact</span>
           </div>
-          <div className="p-5 border border-slate-100 rounded-3xl flex flex-col gap-3">
+          <div className="p-5 border border-slate-100 rounded-3xl flex flex-col gap-3 hover:bg-orange-50/30 transition-colors">
             <Wind className="text-orange-500" />
-            <span className="text-sm font-bold">Air-conditioning</span>
+            <span className="text-sm font-bold text-slate-900">Air-conditioning</span>
           </div>
-          <div className="p-5 border border-slate-100 rounded-3xl flex flex-col gap-3">
+          <div className="p-5 border border-slate-100 rounded-3xl flex flex-col gap-3 hover:bg-orange-50/30 transition-colors">
             <MapPin className="text-orange-500" />
             <span className="text-sm font-bold text-slate-500">3min to Kwa Ace</span>
           </div>
-          <div className="p-5 border border-slate-100 rounded-3xl flex flex-col gap-3">
+          <div className="p-5 border border-slate-100 rounded-3xl flex flex-col gap-3 hover:bg-orange-50/30 transition-colors">
             <Car className="text-orange-500" />
-            <span className="text-sm font-bold">Garage Parking</span>
+            <span className="text-sm font-bold text-slate-900">Garage Parking</span>
           </div>
         </div>
-
-        <div className="bg-slate-900 p-8 rounded-[2.5rem] text-white">
-          <h4 className="font-bold mb-4 flex items-center gap-2 text-orange-400">
-            <ChevronRight size={16}/> Guest Access
+        <div className="bg-slate-900 p-8 rounded-[2.5rem] text-white relative overflow-hidden">
+          <h4 className="font-bold mb-4 flex items-center gap-2 text-orange-400 relative z-10">
+            <ChevronRight size={16}/> Guest Safety & Access
           </h4>
-          <p className="text-slate-400 text-sm mb-6 leading-relaxed">
-            You come through locked gates past the kitchen to the rooms or via the garage access for complete safety and privacy.
+          <p className="text-slate-400 text-sm mb-6 leading-relaxed relative z-10">
+            Secure entry through locked gates and garage access ensures complete privacy. Available 24/7 for booking.
           </p>
-          <a href="https://wa.me/your-number" className="block text-center bg-orange-600 py-3.5 rounded-2xl font-bold hover:scale-[1.02] transition-transform">
-            BOOK NOW
+          <a href="https://wa.me/27123456789" className="block relative z-10 text-center bg-orange-600 py-3.5 rounded-2xl font-bold hover:scale-[1.02] transition-transform">
+            BOOK VIA WHATSAPP
           </a>
+          <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-orange-600/10 blur-3xl rounded-full"></div>
         </div>
       </div>
     </div>
   </div>
 );
 
-
 export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col font-sans selection:bg-blue-100 selection:text-blue-900">
+      <div className="min-h-screen flex flex-col font-sans selection:bg-blue-100 selection:text-blue-900 bg-white">
         <Navbar />
         <main className="flex-grow">
           <Routes>
