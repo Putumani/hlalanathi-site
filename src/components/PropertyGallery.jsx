@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { X } from "lucide-react";
 
 const PropertyGallery = ({ folder, prefix }) => {
   const [selectedImg, setSelectedImg] = useState(null);
