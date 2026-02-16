@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from 'react';
+
 const PropertyGallery = ({ folder, prefix }) => {
   const [selectedImg, setSelectedImg] = useState(null);
   const images = [1, 2, 3, 4, 5, 6];
