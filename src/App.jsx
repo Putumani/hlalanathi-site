@@ -3,41 +3,15 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
-  useLocation,
 } from "react-router-dom";
-import {
-  MapPin,
-  Wifi,
-  Droplets,
-  Wind,
-  Tv,
-  Car,
-  WashingMachine,
-  Phone,
-  ChevronRight,
-  X,
-  ShieldCheck,
-  Battery,
-  Coffee,
-  Utensils,
-  Star,
-  ArrowLeft,
-} from "lucide-react";
+
 import Home from "./pages/Home"
 import LithaPark from "./pages/Litha"
 import MakhayaBB from "./pages/Makhaya"
 import Footer from "./components/Footer"
 import Navbar from "./components/Navbar"
 import PropertyGallery from "./components/PropertyGallery"
-
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
-};
+import ScrollToTop from "./utility/ScrollToTop"
 
 export default function App() {
   return (
