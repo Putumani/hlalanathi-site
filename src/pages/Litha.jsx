@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { ArrowLeft, Wifi, Droplets, WashingMachine } from "lucide-react";
-import PropertyGallery from "../components/PropertyGallery"
+import PropertyGallery from "../components/PropertyGallery";
 
 const LithaPark = () => (
   <div className="animate-in fade-in duration-1000">

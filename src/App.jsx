@@ -1,19 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import LithaPark from "./pages/Litha";
+import MakhayaBB from "./pages/Makhaya";
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+import PropertyGallery from "./components/PropertyGallery";
+import ScrollToTop from "./components/ScrollToTop";
 
-import Home from "./pages/Home"
-import LithaPark from "./pages/Litha"
-import MakhayaBB from "./pages/Makhaya"
-import Footer from "./components/Footer"
-import Navbar from "./components/Navbar"
-import PropertyGallery from "./components/PropertyGallery"
-import ScrollToTop from "./utility/ScrollToTop"
-
-export default function App() {
+function App() {
   return (
     <Router>
       <ScrollToTop />
@@ -31,3 +26,6 @@ export default function App() {
     </Router>
   );
 }
+
+
+export default  App;

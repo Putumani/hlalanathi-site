@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from "react";
 import { X } from "lucide-react";
 
 const PropertyGallery = ({ folder, prefix }) => {
@@ -39,7 +39,7 @@ const PropertyGallery = ({ folder, prefix }) => {
 
       {selectedImg && (
         <div
-          className="fixed inset-0 z-[100] bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-[9999] bg-slate-950/95 backdrop-blur-md flex items-center justify-center p-4"
           onClick={() => setSelectedImg(null)}
         >
           <button className="absolute top-6 right-6 text-white hover:rotate-90 transition-transform">
